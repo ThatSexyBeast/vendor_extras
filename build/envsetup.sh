@@ -25,10 +25,10 @@ function mka() {
 function breakfast()
 {
     target=$1
-    DU_DEVICES_ONLY="true"
+    SCORPION_DEVICES_ONLY="true"
     unset LUNCH_MENU_CHOICES
     add_lunch_combo full-eng
-    for f in `/bin/ls vendor/du/vendorsetup.sh 2> /dev/null`
+    for f in `/bin/ls vendor/scorpion/vendorsetup.sh 2> /dev/null`
         do
             echo "including $f"
             . $f
@@ -46,7 +46,7 @@ function breakfast()
             lunch $target
         else
             # This is probably just the DU model name
-            lunch du_$target-userdebug
+            lunch scorpion_$target-userdebug
         fi
     fi
     return $?
