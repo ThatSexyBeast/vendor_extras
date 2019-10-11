@@ -44,12 +44,7 @@ if not depsonly:
 
 repositories = []
 
-# repo check
-branch_check = r'external/bson'
-if os.path.exists(branch_check):
-    scorpion_branch = "sr-3.x-caf";
-else:
-    scorpion_branch = "sr-3.x";
+scorpion_branch = "sr-3.x";
 
 # gapps
 repo_check = r'vendor/pixelgapps'
