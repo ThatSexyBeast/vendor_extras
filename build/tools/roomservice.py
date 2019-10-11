@@ -40,26 +40,26 @@ except:
     device = product
 
 if not depsonly:
-    print "Device %s not found. Attempting to retrieve device repository from Scorpion Github (http://github.com/Scorpion)." % device
+    print "Device %s not found. Attempting to retrieve device repository from ScorpionRom Github (http://github.com/ScorpionRom-Devices)." % device
 
 repositories = []
 
 # repo check
 branch_check = r'external/bson'
 if os.path.exists(branch_check):
-    du_branch = "p9x-caf";
+    scorpion_branch = "sr-3.x-caf";
 else:
-    du_branch = "p9x";
+    scorion_branch = "sr-3.x";
 
 # gapps
 repo_check = r'vendor/pixelgapps'
 gapps_location = 'vendor/pixelgapps'
 gapps_git = 'https://gitlab.com/DirtyUnicorns/android_vendor_pixelgapps'
-gapps_branch = 'p9x'
+gapps_branch = 'q10x'
 
 page = 1
 while not depsonly:
-    request = Request("https://api.github.com/users/DirtyUnicorns/repos?page=%d" % page)
+    request = Request("https://api.github.com/users/ScorpionRom-Devices/repos?page=%d" % page)
     api_file = os.getenv("HOME") + '/api_token'
     if (os.path.isfile(api_file)):
         infile = open(api_file, 'r')
@@ -308,7 +308,7 @@ else:
 
             repo_path = "device/%s/%s" % (manufacturer, device)
 
-            add_to_manifest([{'repository':repo_name,'target_path':repo_path,'branch':du_branch}])
+            add_to_manifest([{'repository':repo_name,'target_path':repo_path,'branch':scorpion_branch}])
 
             print "Syncing repository to retrieve project."
             os.system('repo sync %s' % repo_path)
@@ -318,4 +318,4 @@ else:
             print "Done"
             sys.exit()
 
-print "Repository for %s not found in the Scorpion Github repository list. If this is in error, you may need to manually add it to .repo/local_manifests/scorpion_manifest.xml" % device
+print "Repository for %s not found in the ScorpionRom-Devices Github repository list. If this is in error, you may need to manually add it to .repo/local_manifests/scorpion_manifest.xml" % device
