@@ -40,7 +40,7 @@ except:
     device = product
 
 if not depsonly:
-    print "Device %s not found. Attempting to retrieve device repository from ScorpionRom Github (http://github.com/ScorpionRom-Devices)." % device
+    print "Device %s not found. Attempting to retrieve device repository from ScorpionRom-Devices Github (http://github.com/ScorpionRom-Devices)." % device
 
 repositories = []
 
@@ -49,7 +49,7 @@ branch_check = r'external/bson'
 if os.path.exists(branch_check):
     scorpion_branch = "sr-3.x-caf";
 else:
-    scorion_branch = "sr-3.x";
+    scorpion_branch = "sr-3.x";
 
 # gapps
 repo_check = r'vendor/pixelgapps'
@@ -111,7 +111,7 @@ def get_from_manifest(devicename):
         lm = ElementTree.Element("manifest")
 
     for localpath in lm.findall("project"):
-        if re.search("android_device_.*_%s$" % device, localpath.get("name")):
+        if re.search("device_.*_%s$" % device, localpath.get("name")):
             return localpath.get("path")
 
     # Devices originally from AOSP are in the main manifest...
@@ -122,7 +122,7 @@ def get_from_manifest(devicename):
         mm = ElementTree.Element("manifest")
 
     for localpath in mm.findall("project"):
-        if re.search("android_device_.*_%s$" % device, localpath.get("name")):
+        if re.search("device_.*_%s$" % device, localpath.get("name")):
             return localpath.get("path")
 
     return None
@@ -156,7 +156,7 @@ def add_to_manifest_dependencies(repositories):
                 print 'Updating dependency %s' % (repo_name)
                 existing_project.set('name', repository['repository'])
             if existing_project.attrib['revision'] == repository['branch']:
-                print 'Scorpion/%s already exists' % (repo_name)
+                print 'ScorpionRom-Devices/%s already exists' % (repo_name)
             else:
                 print 'updating branch for %s to %s' % (repo_name, repository['branch'])
                 existing_project.set('revision', repository['branch'])
@@ -192,15 +192,15 @@ def add_to_manifest(repositories):
         existing_project = exists_in_tree_device(lm, repo_name)
         if existing_project != None:
             if existing_project.attrib['revision'] == repository['branch']:
-                print 'Scorpion/%s already exists' % (repo_name)
+                print 'ScorpionRom-Devices/%s already exists' % (repo_name)
             else:
-                print 'updating branch for Scorpion/%s to %s' % (repo_name, repository['branch'])
+                print 'updating branch for ScorpionRom-Devices/%s to %s' % (repo_name, repository['branch'])
                 existing_project.set('revision', repository['branch'])
             continue
 
-        print 'Adding dependency: Scorpion/%s -> %s' % (repo_name, repo_target)
+        print 'Adding dependency: ScorpionRom-Devices/%s -> %s' % (repo_name, repo_target)
         project = ElementTree.Element("project", attrib = { "path": repo_target,
-            "remote": "github", "name": "Scorpion/%s" % repo_name, "revision": scorpion_branch })
+            "remote": "github", "name": "ScorpionRom-Devices/%s" % repo_name, "revision": scorpion_branch })
 
         if 'branch' in repository:
             project.set('revision', repository['branch'])
@@ -302,9 +302,9 @@ if depsonly:
 else:
     for repository in repositories:
         repo_name = repository['name']
-        if repo_name.startswith("android_device_") and repo_name.endswith("_" + device):
+        if repo_name.startswith("device_") and repo_name.endswith("_" + device):
             print "Found repository: %s" % repository['name']
-            manufacturer = repo_name.replace("android_device_", "").replace("_" + device, "")
+            manufacturer = repo_name.replace("device_", "").replace("_" + device, "")
 
             repo_path = "device/%s/%s" % (manufacturer, device)
 
