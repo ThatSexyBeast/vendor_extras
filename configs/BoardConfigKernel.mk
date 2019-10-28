@@ -33,3 +33,14 @@ KERNEL_ARCH := $(TARGET_ARCH)
 else
 KERNEL_ARCH := $(TARGET_KERNEL_ARCH)
 endif
+
+# Set DTBO image locations so the build system knows to build them
+ifeq ($(TARGET_NEEDS_DTBOIMAGE),true)
+BOARD_PREBUILT_DTBOIMAGE ?= $(PRODUCT_OUT)/dtbo/arch/$(KERNEL_ARCH)/boot/dtbo.img
+else ifeq ($(BOARD_KERNEL_SEPARATED_DTBO),true)
+BOARD_PREBUILT_DTBOIMAGE ?= $(PRODUCT_OUT)/dtbo-pre.img
+endif
+
+ifeq ($(BOARD_INCLUDE_DTB_IN_BOOTIMG),true)
+BOARD_PREBUILT_DTBIMAGE_DIR ?= $(PRODUCT_OUT)/dtbs/arch/$(KERNEL_ARCH)/boot/dts/**
+endif
