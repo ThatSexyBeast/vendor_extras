@@ -40,6 +40,7 @@ from xml.etree import ElementTree
 DEFAULT_REMOTE = 'github'
 DEFAULT_ORG = 'ScorpionRom-Devices'
 DEFAULT_BRANCH = 'sr-3.x'
+ALTERNATE_REMOTE = 'srgit'
 # Dependency file name
 DEPENDENCY_FILE = 'scorpion.dependencies'
 # Where the local manifest path is located
@@ -290,7 +291,7 @@ def process_repo(repo):
     # If it doesn't match the regex, use gerrit for syncing
     else:
         name = repo
-        remote = GERRIT_REMOTE
+        remote = ALTERNATE_REMOTE
 
     return (name, remote)
 
