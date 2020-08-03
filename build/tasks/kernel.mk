@@ -52,6 +52,8 @@
 #                                          TARGET_KERNEL_CROSS_COMPILE_PREFIX
 #                                          is in PATH
 #
+#   BOARD_DTBO_CFG                     = Path to a mkdtboimg.py config file
+#
 #   KERNEL_CC                          = The C Compiler used. This is automatically set based
 #                                          on whether the clang version is set, optional.
 #
@@ -380,7 +382,11 @@ $(BOARD_PREBUILT_DTBOIMAGE):
 	echo -e ${CL_GRN}"Building DTBO image"${CL_RST}
 	$(call make-dtbo-target,$(KERNEL_DEFCONFIG))
 	$(call make-dtbo-target,dtbs)
+ifdef BOARD_DTBO_CFG
+	$(MKDTBOIMG) cfg_create $@ $(BOARD_DTBO_CFG) -d $(DTBO_OUT)/arch/$(KERNEL_ARCH)/boot/dts
+else
 	$(MKDTBOIMG) create $@ --page_size=$(BOARD_KERNEL_PAGESIZE) $(shell find $(DTBO_OUT)/arch/$(KERNEL_ARCH)/boot/dts -type f -name "*.dtbo" | sort)
+endif
 else
 $(BOARD_PREBUILT_DTBOIMAGE):
 	echo -e ${CL_GRN}"Building DTBO image"${CL_RST}
