@@ -1,4 +1,7 @@
-PATH_OVERRIDE_SOONG := $(shell echo $(TOOLS_PATH_OVERRIDE))
+ifneq (,$(wildcard $(OUT_DIR)/.path_interposer_origpath))
+
+ORIG_PATH := $(shell cat $(OUT_DIR)/.path_interposer_origpath)
+endif
 
 # Add variables that we wish to make available to soong here.
 EXPORT_TO_SOONG := \
@@ -8,7 +11,11 @@ EXPORT_TO_SOONG := \
     KERNEL_MAKE_FLAGS \
     PATH_OVERRIDE_SOONG \
     TARGET_KERNEL_CONFIG \
-    TARGET_KERNEL_SOURCE
+    TARGET_KERNEL_SOURCE \
+	  ORIG_PATH \
+    KERNEL_CLANG_TRIPLE \
+    KERNEL_CC \
+    MAKE_PREBUILT 
 
 SOONG_CONFIG_NAMESPACES += scorpionVarsPlugin
 
