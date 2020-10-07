@@ -35,10 +35,8 @@ KERNEL_ARCH := $(TARGET_KERNEL_ARCH)
 endif
 
 # Set DTBO image locations so the build system knows to build them
-ifeq ($(TARGET_NEEDS_DTBOIMAGE),true)
-BOARD_PREBUILT_DTBOIMAGE ?= $(PRODUCT_OUT)/dtbo/arch/$(KERNEL_ARCH)/boot/dtbo.img
-else ifeq ($(BOARD_KERNEL_SEPARATED_DTBO),true)
-BOARD_PREBUILT_DTBOIMAGE ?= $(PRODUCT_OUT)/dtbo-pre.img
+ifeq (true,$(filter true, $(TARGET_NEEDS_DTBOIMAGE) $(BOARD_KERNEL_SEPARATED_DTBO)))
+BOARD_PREBUILT_DTBOIMAGE ?= $(TARGET_OUT_INTERMEDIATES)/DTBO_OBJ/arch/$(KERNEL_ARCH)/boot/dtbo.img
 endif
 
 # Set the out dir for the kernel's O= arg
