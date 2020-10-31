@@ -313,11 +313,11 @@ if __name__ == "__main__":
     # Target to build
     product = sys.argv[1]
 
-    # If the target is i.e du_taimen, we just need to get taimen
+    # If the target is i.e scorpion_taimen, we just need to get taimen
     try:
         device = product[product.index("_") + 1:]
     except ValueError:
-        exit("The target you entered wouldn't work, use instead du_{0}\n".format(product))
+        exit("The target you entered wouldn't work, use instead scorpion_{0}\n".format(product))
 
     # Whether we need to just fetch dependencies or not
     if len(sys.argv) > 2:
@@ -354,7 +354,7 @@ if __name__ == "__main__":
                 fetch_dependencies(repo_path)
         else:
             # Repo not found
-            cprint.fail('\nRepository for %s not found in the DU Github repository list.\nIf this is in error, you may need to manually add it to the %s\n' % (device, LOCAL_MANIFEST_PATH))
+            cprint.fail('\nRepository for %s not found in the ScorpionROM-Devices Github repository list.\nIf this is in error, you may need to manually add it to the %s\n' % (device, LOCAL_MANIFEST_PATH))
     else:
         repo_path = get_from_manifest(device)
         if repo_path:
