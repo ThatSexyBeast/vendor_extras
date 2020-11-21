@@ -47,9 +47,9 @@ bacon: $(INTERNAL_OTA_PACKAGE_TARGET)
 	@echo -e ${CL_RED}" /       \  \__(  <_> )  | \/  |_> >  (  <_> )   |  \ "${CL_RED}
 	@echo -e ${CL_RED}"/______  /\___  >____/|__|  |   __/|__|\____/|___|  / "${CL_RED}
 	@echo -e ${CL_RED}"       \/     \/            |__|                  \/  "${CL_RED}
-	@echo -e ${CL_RED}"Device Name: "${CL_BLU} $(TARGET_DEVICE)
-	@echo -e ${CL_RED}"=============================================================================="${CL_RED}
-	@echo -e ${CL_RST}""Package Complete: "$(INTERNAL_BACON_TARGET)"${CL_RST}
-	@echo -e ${CL_RED}"=============================================================================="${CL_RED}
-	@echo -e ${CL_BLU}"Feel The Sting."${CL_RST}
+	@echo -e "\033[92mDevice Name: $(TARGET_DEVICE)"
+	@echo -e ${CL_RED}"========================================================================================"${CL_RED}
+	@echo -e "\033[92mPackage Complete: $(INTERNAL_BACON_TARGET)"
+	@echo -e ${CL_RED}"========================================================================================"${CL_RED}
+	@echo -e "\033[92mFeel The Sting when you \033[5mFlash\033[0m \033[92mthat Thing!"
 
