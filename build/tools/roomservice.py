@@ -40,7 +40,7 @@ from xml.etree import ElementTree
 DEFAULT_REMOTE = 'github'
 DEFAULT_ORG = 'ScorpionRom-Devices'
 DEFAULT_BRANCH = 'sr4'
-ALTERNATE_REMOTE = 'srgit'
+ALTERNATE_REMOTE = 'gerrit'
 # Dependency file name
 DEPENDENCY_FILE = 'scorpion.dependencies'
 # Where the local manifest path is located
